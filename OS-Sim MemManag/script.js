@@ -1,5 +1,7 @@
 
 function parition(size, process, fragment) {
+    count++;
+    this.id=count;    
     this.size=size;
     this.process=process;
     this.fragment=fragment;
@@ -7,6 +9,7 @@ function parition(size, process, fragment) {
 
 var p=[]
 var process=[];
+var count=0;
 
 p.push(new parition(30,-1,-1));
 p.push(new parition(20,-1,-1));
@@ -17,6 +20,35 @@ process.push({size: 30});
 process.push({size: 10});
 process.push({size: 40});
 process.push({size: 50});
+
+
+$(document).ready(function(){
+    
+    $("#example-table").tabulator({
+        height:205, // set height of table (in CSS or here), this enables the Virtual DOM and improves render speed dramatically (can be any valid css height value)
+        layout:"fitColumns", //fit columns to width of table (optional)
+        columns:[ //Define Table Columns
+            {title:"Partition ID", field:"id", width:150},           
+            {title:"Partition Size", field:"size", align:"left"},            
+            {title:"Allocated Process ID", field:"process"},
+            {title:"Internal Fragementation", field:"fragment", formatter:"progress"},
+        ],
+        rowClick:function(e, row){ //trigger an alert message when the row is clicked
+            alert("Row " + row.getData().id + " Clicked!!!!");
+        },
+    });
+
+    //load sample data into the table
+    $("#example-table").tabulator("setData", p);
+
+ });
+
+
+
+
+
+
+
 
 
 
@@ -45,13 +77,7 @@ function addPartition()
     
 }
 
-function display()
-    {
-        for(x in parition)
-            {
-                c
-            }
-    }
+
 
 function addProcess()
 {
@@ -87,7 +113,6 @@ function alert(string,type)
            
     }
 
-
 function allocate()
 {
     flush();
@@ -97,6 +122,8 @@ function allocate()
     outerloop:
     for(i=0;i<process.length;i++)
         {
+            if( process[i]==-1)
+                continue;
             console.log("Process: "+i+" Size: "+process[i].size);
             for(j=0;j<p.length;j++)
                 {
@@ -116,25 +143,29 @@ function allocate()
             allocalert(process[i].size)
         }
 
-        myTable();
+    $("#example-table").tabulator("setData", p);
         
+
 }
 
+function swap()
+    {
+        var id=$("#swapprocess").innerText;
+        id=parseInt(id);
+        for(x in p)
+            {
+                if (p[x].process==id)
+                    {
+                        console.log(x);
+                        process[id]=-1;
+                        p[x].process=-1;
+                        p[x].fragment=-1;
 
-//    for(x in p)
-  //  table.row.add(p[x] );
-    //table.draw();
+                    }
 
+            }
+        $("#example-table").tabulator("setData", p);
+        
+    }
 
-function myTable(){
-    var table = $('#allocation-table').DataTable({
-        data:p,
-        columns: [
-            { title:"Size", data: null, render: 'size' },            
-            { title:"Process Allocated", data: null, render: 'process' },
-            { title:"Internal Fragmentation", data: null, render: 'fragment' }
-        ]
-    })
-
-};
 
