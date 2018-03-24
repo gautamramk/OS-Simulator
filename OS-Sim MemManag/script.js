@@ -90,7 +90,7 @@ function addProcess()
         return;
     }
     size=parseInt(size);    
-    document.getElementById('partition').value='';
+    document.getElementById('process').value='';
     process.push({size: size,})
     console.log("New Process size "+size+" created");
     alert("Process of size "+size+" Added!","success");
