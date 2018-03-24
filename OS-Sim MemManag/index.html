@@ -23,43 +23,47 @@
             <h1 class="centered" style="font-family: 'IBM Plex Mono', monospace">Memory Management</h1>
             
  
-            <div class="input-group mb-2">
-            <input type="text" class="form-control" id="partition" placeholder="Enter Partition Size" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onclick="addPartition()">Add Partition</button>
+            <div class="row">
+                <div class="col-sm-6">
+                        <div class="input-group mb-2">
+                                <input type="text" class="form-control" id="partition" placeholder="Enter Partition Size" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" onclick="addPartition()">Add Partition</button>
+                                </div>
+                                <br>
+                        </div>
+                        <div class="input-group mb-2">                      
+                                <input type="text" class="form-control"  id="process" placeholder="Enter Process Size" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button" onclick="addProcess()">Add Process</button>
+                                </div>
+                        </div>      
+                        <div class="input-group mb-2">
+                                <input type="text" class="form-control"  id="swapprocess" style="width: 50px" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-danger" type="button" onclick="swap()">Swap</button>
+                                </div>
+                        </div>
+                        <button class="btn btn-success" style="width:300px" onclick="allocate()">Allocate</button>
+                        <br>
+                        <div id="chartContainer" style="height: 300px; width: 80%;"></div>
+                        
+
+                </div>
+                <div class="col-sm-6">
+                    <div id="example-table"></div>
+                    <br>
+                    <div id="alertpa" class="alert alert-success" role="alert" style="display:none" ></div>
+                    <div id="alloc-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
+                    <div id="swap-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
+                </div>
             </div>
-            <br>
-            
-            <input type="text" class="form-control"  id="process" placeholder="Enter Process Size" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onclick="addProcess()">Add Process</button>
-            </div>
-        </div>
+
 
        
      
-        <button class="btn btn-success" onclick="allocate()">Allocate</button>
-        
-        <br>
-        <br>
-        
 
-        <div id="example-table"></div>
 
-        <br>
-        <div class="input-group mb-2">
-        <input type="text" class="form-control"  id="swapprocess" style="width: 50px" aria-describedby="basic-addon2">
-        <div class="input-group-append">
-            <button class="btn btn-danger" type="button" onclick="swap()">Swap</button>
-        </div>
-        </div>
-
-        <div id="alertpa" class="alert alert-success" role="alert" style="display:none" ></div>
-        <div id="alloc-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
-        <div id="swap-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
-        
-
-        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 
         </div>
 

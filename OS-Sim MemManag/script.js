@@ -73,7 +73,9 @@ function addPartition()
     document.getElementById('partition').value='';
     p.push(new parition(size,-1,-1));
     console.log("New Partition size "+size+" created");
-    alert("Partition of size "+size+" Added!","success");     
+    alert("Partition of size "+size+" Added!","success");
+    $("#example-table").tabulator("setData", p);
+    stack();     
     
 }
 
@@ -92,6 +94,7 @@ function addProcess()
     process.push({size: size,})
     console.log("New Process size "+size+" created");
     alert("Process of size "+size+" Added!","success");
+    
 
 }
 
@@ -177,7 +180,7 @@ function swap()
             }
         
         $("#example-table").tabulator("setData", p);
-        
+        stack();
     }
 
 
@@ -211,7 +214,7 @@ function swap()
         var chart = new CanvasJS.Chart("chartContainer",
         {
             title:{
-                text: "Memory Allocation Stack"
+                text: ""
             },
             axisY:{
                 title:"Memory Size",
