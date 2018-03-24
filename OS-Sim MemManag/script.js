@@ -103,6 +103,14 @@ function allocalert(size)
         setInterval(function(){document.getElementById('alloc-alert').style.display="none",document.getElementById('alloc-alert').innerHTML= '';  },2000);
         
     }
+
+function swapalert(id, size)
+    {
+        document.getElementById("swap-alert").innerText="Swapped Process "+id+" Size: "+size;
+        document.getElementById('swap-alert').style.display= "block";
+        setInterval(function(){document.getElementById('swap-alert').style.display="none",document.getElementById('swap-alert').innerHTML= '';  },2000);
+        
+    }
 function alert(string,type)
     {
         console.log("alert alert-"+type);
@@ -144,14 +152,17 @@ function allocate()
         }
 
     $("#example-table").tabulator("setData", p);
+    stack();
         
 
 }
 
 function swap()
     {
-        var id=$("#swapprocess").innerText;
+        var id=document.getElementById("swapprocess").value;
+        console.log("swap "+id);
         id=parseInt(id);
+        swapalert(id,process[id].size)        
         for(x in p)
             {
                 if (p[x].process==id)
@@ -164,8 +175,48 @@ function swap()
                     }
 
             }
+        
         $("#example-table").tabulator("setData", p);
         
     }
 
 
+    function chartify()
+        {
+            var d=[];
+            for (x in p)
+                {
+                    if(p[x].process==-1)
+                        {                    
+                        d.push({type:"stackedColumn", legendText: "FreeSpace" ,showInLegend: "true", dataPoints: [{ y: p[x].size, label: "Space"}]})
+                        continue;   
+                        }
+                    var fragment;
+                    if (p[x].fragment==-1)
+                        fragment=0;
+                    else
+                        fragment=p[x].fragment;
+                    var string="Process "+p[x].process;
+                    var frag="Fragment "+x;
+                    d.push({type:"stackedColumn", legendText: string ,showInLegend: "true", dataPoints: [{ y: p[x].size-fragment, label: string}]})
+                    d.push({type:"stackedColumn", legendText: frag ,showInLegend: "true", dataPoints: [{ y: fragment, label: "Fragment"}]})                
+                    
+                }
+            
+                return d;
+        }
+
+
+    function stack () {
+        var chart = new CanvasJS.Chart("chartContainer",
+        {
+            title:{
+                text: "Memory Allocation Stack"
+            },
+            axisY:{
+                title:"Memory Size",
+            },
+            data: chartify()
+        });
+        chart.render();
+    }
