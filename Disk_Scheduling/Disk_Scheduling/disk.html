@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="disk.css"/>
+    <link rel="script" href="pointer.js"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="jQueryRotate.js"></script>
+
+</head>
+<body>
+
+<script>
+
+    var seq = [53,64,90,128,150,35,20,15,80];
+    seqlen = seq.length;
+    i=0;
+    var int = 0;
+    function ani(){
+
+
+        console.log(seqlen);
+        //for(var i = 0; i<seqlen; i++){
+          //  var angle = (seq[i]/200)*180;
+            //console.log(angle);
+            //$('.needle').rotate({animateTo:angle,center: ["100%", "50%"]});
+        int = setInterval(rot,1500);
+
+
+    }
+
+    function rot(){
+
+        if(i<seqlen){
+            var angle = (seq[i]/200)*180;
+            console.log(angle);
+            $('.needle').rotate({animateTo:angle,center: ["100%", "50%"]});
+            i = i+1;
+        }else{
+            document.getElementById("n").style.transform = "rotate(0deg)";
+            clearInterval(int);
+        }
+    }
+</script>
+<div class="box">
+    <div class="half-circle">
+    </div>
+    <div class="needle" id="n"></div>
+</div>
+
+<br>
+<br>
+<button onclick="ani();">Click to animate</button>
+</body>
+</html>
