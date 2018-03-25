@@ -4,7 +4,7 @@ function parition(size, process, fragment) {
     this.id=count;    
     this.size=size;
     this.process=process;
-    this.fragment=fragment;
+    this.fragment=fragment; 
 }
 
 var p=[]
@@ -75,9 +75,33 @@ function addPartition()
     console.log("New Partition size "+size+" created");
     alert("Partition of size "+size+" Added!","success");
     $("#example-table").tabulator("setData", p);
-    stack();     
+    stack();
     
 }
+
+
+
+function newBlock(id,size){
+console.log('Adding block');
+colour=randomColor({hue: 'blue', count: 1});
+console.log(colour);
+stylestring = "background:"+colour+"; height: "+size+"px";
+var newNode = document.createElement('div');
+//newNode.textContent = id;
+
+var att = document.createAttribute("class");       // Create a "class" attribute
+att.value = "mem-block";
+newNode.setAttributeNode(att);   
+
+var att = document.createAttribute("style");        // creating style attrubute
+att.value= stylestring
+newNode.setAttributeNode(att);
+
+console.log(newNode.getAttribute("style"));
+document.getElementById('memstack').appendChild(newNode);
+
+}
+
 
 
 
@@ -156,7 +180,7 @@ function allocate()
 
     $("#example-table").tabulator("setData", p);
     stack();
-        
+    manualstack();   
 
 }
 
@@ -181,6 +205,7 @@ function swap()
         
         $("#example-table").tabulator("setData", p);
         stack();
+        manualstack();
     }
 
 
@@ -222,4 +247,16 @@ function swap()
             data: chartify()
         });
         chart.render();
+    }
+
+    function manualstack()  {
+        for (x in p)
+            {
+                console.log(p);
+                frag=p[x].fragment;
+                if(frag==-1) frag=0;
+                newBlock(p[x].process,p[x].size-frag);
+                if(frag!=0)
+                    newBlock("Fragment",frag);
+            }
     }

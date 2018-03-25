@@ -9,11 +9,23 @@ position : absolute;
 transform : translate(-50%,-50%);
 box-sizing : border-box;
 padding : 70px 30px;
+}   
+
+
+
+.mem-block {
+
+
+    border-bottom-style: ridge;
+    border-width: 1px;
+    border-color: black;
+    width: 200px;
+    height: 50px;
+    mix-blend-mode: screen;
+    margin-left:100px;
 }
 
-.div {
-    width: 300px;
-    border: 25px solid green;
-    padding: 25px;
-    margin: 25px;
+
+body {
+    background-color: yellowgreen;
 }

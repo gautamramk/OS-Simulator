@@ -19,12 +19,12 @@
 
             <br>
             <br>
-            <div class="container">
+            <div class="container" style="border-style:ridge; background: white; padding:100px; padding-top:20px; padding-bottom:20px;margin-top:100px">
             <h1 class="centered" style="font-family: 'IBM Plex Mono', monospace">Memory Management</h1>
             
  
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                         <div class="input-group mb-2">
                                 <input type="text" class="form-control" id="partition" placeholder="Enter Partition Size" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
@@ -39,31 +39,31 @@
                                 </div>
                         </div>      
                         <div class="input-group mb-2">
-                                <input type="text" class="form-control"  id="swapprocess" style="width: 50px" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" placeholder="Enter Process ID" id="swapprocess" style="width: 50px" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-danger" type="button" onclick="swap()">Swap</button>
                                 </div>
                         </div>
                         <button class="btn btn-success" style="width:300px" onclick="allocate()">Allocate</button>
                         <br>
-                        <div id="chartContainer" style="height: 300px; width: 80%;"></div>
-                        
+                        <br>                        
+                        <div id="example-table"></div>
+                        <div id="alertpa" class="alert alert-success" role="alert" style="display:none" ></div>
+                        <div id="alloc-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
+                        <div id="swap-alert" class="alert alert-danger" role="alert" style="display:none" ></div>                 
+                        <br>
 
                 </div>
-                <div class="col-sm-6">
-                    <div id="example-table"></div>
-                    <br>
-                    <div id="alertpa" class="alert alert-success" role="alert" style="display:none" ></div>
-                    <div id="alloc-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
-                    <div id="swap-alert" class="alert alert-danger" role="alert" style="display:none" ></div>
+                <div class="col-sm-4" >
+                    
+                    <div id="chartContainer" style="height: 450px; width: 100%;"></div>                  
                 </div>
             </div>
 
 
-       
-     
+            
 
-
+            <div id="memstack" style="display:none"></div>
 
         </div>
 
@@ -71,7 +71,8 @@
 
 
     
-    <!-- Optional JavaScript  -->
+                   >                    
+                    <!-- Optional JavaScript     -->
 
     
 
@@ -81,8 +82,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.5/js/tabulator.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.2/randomColor.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>   
     <script src="script.js"></script>
-    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    
 </body>
 </html>

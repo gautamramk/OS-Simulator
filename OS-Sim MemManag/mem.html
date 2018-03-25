@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style> 
+#mem-block {
+
+    background: #73AD21;
+    padding-left: 10px;
+    width: 200px;
+    height: 100px;
+    margin-left:10px;
+}
+
+</style>
+
+
+</head>
+<body>
+
+<div id="memstack"></div>
+<div id="mem-block"></div>
+
+
+
+<script>
+
+function newBlock(){
+    console.log('Adding block');
+var newNode = document.createElement('div');
+newNode.textContent = "Sup, y'all?";
+var att = document.createAttribute("class");       // Create a "class" attribute
+att.value = "mem-block";
+newNode.setAttributeNode(att);   
+document.getElementById('memstack').appendChild(newNode);
+}
+
+
+newBlock();
+</script>
+</body>
+</html>
