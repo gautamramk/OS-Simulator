@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>  login form  </title>
+<link rel ="stylesheet" type ="text/css" href="style.css">
+<body>
+<div class="login-box">
+<img src="avatar.jpg" class ="avatar">
+<h1>Login Here</h1>
+<form>
+<p>Username</p>
+<input type ="text" name ="username" placeholder="Enter Username">
+<p>Password</p>
+<input type ="password" name ="password" placeholder ="Enter Password">
+<input type ="submit" onclick="check(this.form)" name= "submit" value ="login">
+</form>
+<script language ="javascript">
+function check(form)/*function to check userid & password*/
+    {
+     /*the following code checkes whether the entered userid and password are matching*/
+     if(form.username.value == "student" && form.password.value == "student")
+      {
+        window.open("main.html")/*opens the target page while Id & password matches*/
+      }
+     else
+     {
+       alert("Error Password or Username")/*displays error message*/
+      }
+    }
+    </script>
+
+
+</div>
+
+</head>
+</html>
+
+
+
+
+
+
