@@ -1,12 +1,14 @@
 .half-circle {
     width: 200px;
-    height: 100px;
+    height: 200px;
     background-color: gold;
     border-top-right-radius: 100px;
     border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
     border: 10px solid gray;
     /*border-left: 100px;*/
-    border-bottom: 0;
+    /*border-bottom: 0;*/
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -23,6 +25,7 @@
       transform-origin: 50% 100%;
       /*top: 6.7em;*/
       right: 50%;
+      top:50%;
       /*transform-origin: right;*/
       transform: rotate(0deg);
 
