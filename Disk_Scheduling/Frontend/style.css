@@ -1,0 +1,66 @@
+
+#needle {
+  
+    /* Initial value for rotate is needed for transition to work */
+    transform:rotate(0);  
+    top:20.4%;
+    left:30.9%;
+    /* CSS transition creates smooth effect */
+    transition:all 1.5s;
+  }
+
+  #needleim {
+    height:10px;
+    background-color:#808080;
+    width:500px;
+    margin-top:100px;
+  
+    /* Initial value for rotate is needed for transition to work */
+    transform:rotate(0);  
+  
+    /* CSS transition creates smooth effect */
+    transition:all 1.5s;
+  }
+
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 8px;
+    left: 16px;
+}
+
+/* Top left text */
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+/* Top right text */
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+}
+
+/* Centered text */
+.centered {
+    position: absolute;
+    top: 35%;
+    left: 28.7%;
+    transform: translate(-50%, -50%);
+}
