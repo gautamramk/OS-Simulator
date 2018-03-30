@@ -1,9 +1,9 @@
 import websockets
 import asyncio
-
+import json
 
 i = 0
-ra_to_client = dict()
+ws_to_client = dict()
 
 emptycount = asyncio.Semaphore(6)
 fullcount = asyncio.Semaphore(0)
@@ -11,23 +11,41 @@ mutex = asyncio.Semaphore(1)
 
 class q:
     def __init__(self, size):
-        self.max_size = size
-        self.queue = list()
+        self.size = size
+        self.queue = [0 for i in range(size)]
         self.start = -1
         self.end = -1
 
-    def enqueue(self,ele):
+    '''def enqueue(self,ele):
+        if self.start == -1:
+            self.start = 0
+            self.end = 0
+            self.queue[0] = ele
+            return None
+
         if (self.end+1)%self.size != self.start:
             self.end += 1
+            self.end = self.end%self.size
             self.queue[self.end] = ele
+        
     def dequeue(self):
         if self.start != -1:
             ret = self.queue[self.start]
+            self.queue[self.start] = 0
             start = (self.start + 1)%self.size
             if self.start == self.end:
                 self.start = -1
                 self.end = -1
-            return ret
+            return ret'''
+    def enqueue(self, ele):
+        self.start += 1
+        self.queue[self.start] = ele
+
+    def dequeue(self):
+        ret = self.queue[self.start]
+        self.queue[self.start] = 0
+        self.start -= 1
+        return ret
 
 queue = q(6)
 
@@ -64,7 +82,7 @@ async def handler(websocket, path):
     i += 1
 
     c = client(i, websocket)
-    ra_to_client[ra] = c
+    ws_to_client[websocket] = c
     #producer_task = asyncio.ensure_future(handleproduce())
     consumer_task = asyncio.ensure_future(websocket.recv())
     while c.alive:
@@ -78,6 +96,31 @@ async def handler(websocket, path):
 
         if consumer_task in done:
             message = consumer_task.result()
+            if message is None:
+                c.alive = False
+            else:
+                tosend = {}
+                if message == 'p':
+                    print("HI")
+                    await produce()
+                    tosend['queue'] = queue.queue
+                    s = json.dumps(tosend)
+                    print(s)
+                    for key in ws_to_client:
+                        await key.send(s)
+
+                    consumer_task = asyncio.ensure_future(websocket.recv())
+
+                elif message == 'c':
+                    print("BYE")
+                    await consume()
+                    tosend['queue'] = queue.queue
+                    s = json.dumps(tosend)
+                    print(s)
+                    for key in ws_to_client:
+                        await key.send(s)
+
+                    consumer_task = asyncio.ensure_future(websocket.recv())
 
 
 start_server = websockets.serve(handler, 'localhost', 8888)
