@@ -19,3 +19,6 @@ class FileForm(forms.ModelForm):
     class Meta:
         model = File
         fields = ['name','folder']
+
+class newFolder(forms.Form):
+    name = forms.CharField(max_length=50)

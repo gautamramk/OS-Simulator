@@ -8,5 +8,7 @@ app_name='tree_app'
 
 urlpatterns = [
     url(r'^$',views.index,name='index'),
-    url(r'^(?P<user_id>[0-9]+)/$',views.user,name='user'),
+    url(r'^u/(?P<user_id>[0-9]+)/$',views.user,name='user'),
+    url(r'^d/(?P<dir_id>[0-9]+)/$', views.directory, name='directory'),
+    url(r'^d/new/(?P<dir_id>[0-9]+)/$', views.new),
 ]
