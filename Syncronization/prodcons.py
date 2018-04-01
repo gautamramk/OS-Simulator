@@ -84,6 +84,7 @@ async def handler(websocket, path):
     c = client(i, websocket)
     ws_to_client[websocket] = c
     #producer_task = asyncio.ensure_future(handleproduce())
+    await websocket.send(json.dumps({'queue':queue.queue}))
     consumer_task = asyncio.ensure_future(websocket.recv())
     while c.alive:
         done,pending = await asyncio.wait(
