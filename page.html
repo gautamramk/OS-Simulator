@@ -1,0 +1,128 @@
+<html>
+<head>
+	<title>PAGE TABLE</title>
+	<meta charset="utf-8">
+<!--	<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
+	<script>
+var w=[-1,-1,-1,-1,-1];
+var y=[-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var l=1;
+	function addRow()
+	{
+		var data=document.getElementById('data').value;
+		var page=document.getElementById('page').value;
+		var table=document.getElementsByTagName('table')[0];
+		var newRow=table.insertRow(1);
+		var cell=newRow.insertCell(0);
+		var cel1=newRow.insertCell(1);
+		cell.innerHTML=data;
+		cel1.innerHTML=page;
+var p=parseInt(page);
+
+
+
+
+do{
+
+if(l%6==0)
+{
+	l=1;
+	w=[-1,-1,-1,-1,-1]
+}
+
+var x = Math.floor((Math.random() * 5) + 0);
+
+
+}while(w[x]==0);
+w[x]=0;
+l=l+1;
+		document.getElementById('f').deleteRow(p+1);
+var table1=document.getElementById('f');
+		
+		var newRow=table1.insertRow(p+1);
+		var cell=newRow.insertCell(0);
+		var cel1=newRow.insertCell(1);
+		cell.innerHTML=page;
+		cel1.innerHTML=x;
+		document.getElementById('r').deleteRow(x+1);
+		var table2=document.getElementById('r');
+		var newRow=table2.insertRow(x+1);
+		var cell=newRow.insertCell(0);
+		var cel1=newRow.insertCell(1);
+		cell.innerHTML=x;
+		cel1.innerHTML=data;
+
+		
+	
+	}
+
+
+	</script>
+</head>
+<body background= "linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)">
+	DATA:<input type="text" name="data" id="data"/><br/><br/>
+	PAGE NUMBER:<input type="text" name="page" id="page"/><br/><br/>
+
+	<button onclick="addRow();">ADD DATA</button><br/><br/>
+<div>
+	<table style="display:inline-block;" border="1">
+		<tr>
+			<th>Data</th>
+			<th>Page number</th>
+			</tr>
+</table>
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<table style="display:inline-block;"  border="1" id="f">
+
+		<tr>
+			<th>Page number</th>
+			<th>Frame number</th>
+		</tr>
+<tr>
+	<td>0<td>
+	</tr>
+<tr>
+	<td>1<td>
+		</tr><tr>
+	<td>2<td>
+	</tr><tr>
+	<td>3<td>
+	</tr><tr>
+	<td>4<td>
+	</tr><tr>
+	<td>5<td>
+	</tr><tr>
+	<td>6<td>
+	</tr><tr>
+	<td>7<td>
+	</tr><tr>
+	<td>8<td>
+	</tr><tr>
+	<td>9<td>
+	</tr>
+	</table>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	<table style="display:inline-block;" border="1" id="r">
+		<tr>
+			<th>frame number</th>
+			<th>data</th>
+		</tr>
+			<tr>
+				<td>0<td>
+			</tr>
+			<tr>
+				<td>1<td>
+			</tr>
+			<tr>
+				<td>2<td>
+			</tr>
+			<tr>
+				<td>3<td>
+			</tr>
+			<tr>
+				<td>4<td>
+			</tr>
+	</table>
+
+</div>
+
+</body>
+</html>
