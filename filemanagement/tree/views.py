@@ -31,7 +31,11 @@ def directory(request, dir_id):
     path.reverse()
     path.pop()
     form = newFolder()
-    context = {'folders':folders, 'files':files, 'path':path, 'cur':curdir, 'newfolder':form}
+    print(dir_id)
+    df = delFolder()
+    print(df.fields)
+    df.fields['folders'].queryset = Folder.objects.filter(parent=Folder.objects.get(id=dir_id))
+    context = {'folders':folders, 'files':files, 'path':path, 'cur':curdir, 'newfolder':form, 'delfolder':df}
 
     return render(request, 'tree/tree.html', context)
 
@@ -43,4 +47,10 @@ def new(request,dir_id):
         newdir.user = Folder.objects.get(id=dir_id).user
         newdir.name = nf.cleaned_data.get("name")
         newdir.save()
-    return HttpResponseRedirect("/d/"+str(dir_id)) 
+    return HttpResponseRedirect("/d/"+str(dir_id))
+
+def de(request,dir_id):
+    df = delFolder(request.POST)
+    if df.is_valid():
+        df.cleaned_data.get('folders').delete()
+    return HttpResponseRedirect("/d/"+str(dir_id))

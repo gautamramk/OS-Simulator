@@ -53,8 +53,11 @@
             <button type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#newfolder">Create Directory</button>
             <button class="btn btn-primary btn-danger" name="command"
                 value="rm">Remove File</button>
-            <button class="btn btn-primary btn-danger" name="command"
-                value="rmdir">Remove Directory</button>
+            <form method="POST" action="/d/del/{{cur.id}}/">
+                {% csrf_token %}
+                {{delfolder}}
+                <button class="btn btn-primary btn-danger" type="submit">Remove Directory</button>
+            </form>
             <button class="btn btn-primary btn-warning" name="command"
                 value="cd">Change Directory</button>
         </div>
