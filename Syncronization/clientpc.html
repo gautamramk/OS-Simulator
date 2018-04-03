@@ -2,43 +2,85 @@
 <html>
     <head>
         <meta charset="utf-8">
-    <script type="text/javascript">
-        var queue;
-        var ws = null;
-        function WebSocketTest() {
-            var messageContainer = document.getElementById("messages");
-            if ("WebSocket" in window) {
-                messageContainer.innerHTML = "WebSocket is supported by your Browser!";
-                ws = new WebSocket("ws://localhost:8888/?Id=123456789");
-                ws.onopen = function() {
-                    //ws.send("read");
-                };
-                ws.onmessage = function (evt) {
-                    var received_msg = evt.data;
-                    //messageContainer.innerHTML = "Message is received...";
-                    messageContainer.innerHTML = received_msg;
-                    console.log(received_msg);
-                    queue = JSON.parse(received_msg);
-                };
-                ws.onclose = function() {
-                    messageContainer.innerHTML = "Connection is closed...";
-                };
-            } else {
-                messageContainer.innerHTML = "WebSocket NOT supported by your Browser!";
-            }
-        }
-        function produce(){
-            ws.send("p")
-        }
-        function consume(){
-            ws.send("c");
-        }
-        </script>
+
     </head>
     <body>
+
         <a href="javascript:WebSocketTest()">Run WebSocket</a>
         <div id="messages" style="height:200px;background:black;color:white;"></div>
         <button onclick="produce()">Produce</button>
         <button onclick="consume()">Consume</button>
+        <div class="container"></div>
+
+        <div class="conainer">
+
+        <div class='element0'>gabriel@lowercase ~$ </div>
+        <div class='element1 nodisplay'>gabriel@lowercase ~$ </div>
+        <div class='element2 nodisplay'>gabriel@lowercase ~$ </div>
+        <div class='element3 nodisplay'>gabriel@lowercase ~$ </div>
+        <div class='element4 nodisplay'>gabriel@lowercase ~$ </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="typed.min.js"></script>
+    <script src="prodcon.js"></script>
+    <script>
+    setTimeout(function(){
+    $(".element0").typed({
+        strings: ["apt-get install konquer"],
+        typeSpeed: 30, // typing speed
+        backDelay: 750, // pause before backspacing
+        loop: false, // loop on or off (true or false)
+        loopCount: false, // number of loops, false = infinite
+        callback: function(){ } // call function after typing is done
+    });
+}, 0);
+
+setTimeout(function(){
+    $(".element1").css("display", "inherit");
+    $(".element1").typed({
+        strings: ["konquer -r /world"],
+        typeSpeed: 30, // typing speed
+        backDelay: 750, // pause before backspacing
+        loop: false, // loop on or off (true or false)
+        loopCount: false, // number of loops, false = infinite
+        callback: function(){ } // call function after typing is done
+    });
+}, 2000);
+
+setTimeout(function(){
+    $(".element2").css("display", "inherit");
+    $(".element2").typed({
+        strings: ["chown gabriel /world"],
+        typeSpeed: 30, // typing speed
+        backDelay: 750, // pause before backspacing
+        loop: false, // loop on or off (true or false)
+        loopCount: false, // number of loops, false = infinite
+        callback: function(){ } // call function after typing is done
+    });
+}, 4000);
+
+setTimeout(function(){
+    $(".element3").css("display", "inherit");
+    $(".element3").typed({
+        strings: ["chmod 700 /world"],
+        typeSpeed: 30, // typing speed
+        backDelay: 750, // pause before backspacing
+        loop: false, // loop on or off (true or false)
+        loopCount: false, // number of loops, false = infinite
+        callback: function(){ } // call function after typing is done
+    });
+}, 6000);
+
+setTimeout(function(){
+    $(".element4").css("display", "inherit");
+    $(".element4").typed({
+        strings: ["chown parents /world/australia"],
+        typeSpeed: 30, // typing speed
+        backDelay: 750, // pause before backspacing
+        loop: false, // loop on or off (true or false)
+        loopCount: false, // number of loops, false = infinite
+        callback: function(){ } // call function after typing is done
+    });
+}, 8000);</script>
     </body>
 </html>
