@@ -1,0 +1,115 @@
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+
+</head>
+
+<body>
+    <div class="modal fade" id="newfolder" role="dialog">
+        <div class="modal-dialog">
+                     <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/d/new/{{cur.id}}/">
+                        {% csrf_token %}
+                        
+                        {{newfolder}}
+                    </form>
+                </div>
+            </div>
+                  
+        </div>
+    </div>
+    <div class="modal fade" id="delfolder" role="dialog">
+        <div class="modal-dialog">
+                     <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Folders</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/d/del/{{cur.id}}/">
+                        {% csrf_token %}
+
+                        {{delfolder}}
+                        <button class="btn btn-primary btn-danger" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal fade" id="newfile" role="dialog">
+        <div class="modal-dialog">
+                     <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">File Name</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/f/new/{{cur.id}}/">
+                        {% csrf_token %}
+
+                        {{newfile}}
+                        <button class="btn btn-primary btn-danger" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class = "panel panel-primary"
+        style="margin : 0.25cm 0.25cm 0.25cm 0.25cm;">
+        <div class="panel-heading">
+            <h2>Tree Structured Directory</h2>
+        </div>
+        <ul class="breadcrumb"></ul>
+        <div class="panel-body">
+            <!---<form action = "process" method="post" id="mainform">
+                {% csrf_token %}
+            </form>-->
+            <div id="path" style="display: inline">
+            {% for p in path %}
+                <a href="/d/{{p.id}}">{{p.name}}</a> >
+            {% endfor %}
+            {{cur.name}}
+            </div>
+            <br>
+            {% if folders%}
+            {% for folder in folders %}
+                <a href="/d/{{folder.id}}">{{folder.name}}</a>
+            {% endfor %}
+            {% endif %}
+            {% if files %}
+            {% for file in files %}
+                <a href="/f/text/{{file.id}}" style="color:green">{{file.name}}</a>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="panel-footer">
+            <button type="button" class="btn btn-primary btn-success" data-toggle="modal"
+                    data-target="#newfile">Add File</button>
+            <button type="button" class="btn btn-primary btn-success" data-toggle="modal"
+                    data-target="#newfolder">Create Directory</button>
+            <button class="btn btn-primary btn-danger" name="command"
+                value="rm">Remove File</button>
+            <!--<form method="POST" action="/d/del/{{cur.id}}/">-->
+                <!--{% csrf_token %}-->
+                <!--{{delfolder}}-->
+                <!--<button class="btn btn-primary btn-danger" type="submit">Remove Directory</button>-->
+            <!--</form>-->
+            <button class="btn btn-primary btn-danger" data-toggle="modal"
+                    data-target="#delfolder">Remove Directory</button>
+            <button class="btn btn-primary btn-warning" name="command"
+                value="cd">Change Directory</button>
+        </div>
+    </div>
+</body>
