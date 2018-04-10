@@ -30,7 +30,7 @@ async def readop():
 
     print("Reading message.")
     ret = protectedtxt
-    await asyncio.sleep(10)
+    await asyncio.sleep(5)
     print("Read done: "+ret)
     await mutex.acquire()
     rc -= 1
@@ -45,7 +45,7 @@ async def writeop(message):
     global datalock
     await datalock.acquire()
     print("Writing message")
-    await asyncio.sleep(10)
+    await asyncio.sleep(5)
     protectedtxt = message
 
     print("Wrote: "+protectedtxt)
@@ -93,7 +93,7 @@ async def handler(websocket, path):
                     await websocket.send("Message written")
                     consumer_task = asyncio.ensure_future(websocket.recv())
 
-start_server = websockets.serve(handler, 'localhost', 8888)
+start_server = websockets.serve(handler, 'localhost', 8890)
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
 
