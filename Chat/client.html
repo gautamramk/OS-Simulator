@@ -1,7 +1,13 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <meta charset="utf-8">
 	<script type="text/javascript">
         var ws = null;
         function WebSocketTest() {
@@ -10,12 +16,17 @@
                 messageContainer.innerHTML = "WebSocket is supported by your Browser!";
                 ws = new WebSocket("ws://localhost:8888/?Id=123456789");
                 ws.onopen = function() {
-                    ws.send("Govind");
+
                 };
                 ws.onmessage = function (evt) {
                     var received_msg = evt.data;
                     //messageContainer.innerHTML = "Message is received...";
-                    messageContainer.innerHTML = received_msg;
+                    //alert(evt.data);
+                    var para = document.createElement("P");
+                    var t = document.createTextNode(evt.data);
+                    para.appendChild(t);
+                    messageContainer.appendChild(para);
+                    //messageContainer.innerHTML = received_msg;
                     console.log(received_msg);
                 };
                 ws.onclose = function() {
@@ -29,16 +40,102 @@
             var txt = document.getElementById("write").value
             ws.send(txt)
         }
-        function read(){
-            ws.send("read");
-        }
+
         </script>
-    </head>
-    <body>
-        <a href="javascript:WebSocketTest()">Run WebSocket</a>
-        <div id="messages" style="height:200px;background:black;color:white;"></div>
-        <input type="text" id="write"></input>
-        <button onclick="send()">Write</button>
-        <button onclick="read()">Read</button>
-    </body>
+  </head>
+  <body>
+
+
+                <div class="example p-0" style="height: 1000px;">
+                    <div data-role="navview" data-compact="md" data-expanded="lg" data-toggle="#pane-toggle">
+                        <nav class="navview-pane">
+                            <button class="pull-button">
+                                <span class="mif-menu"></span>
+                            </button>
+
+                            <div class="suggest-box">
+                                <input data-role="search" data-clear-button="false">
+                                <button class="holder">
+                                    <span class="mif-search"></span>
+                                </button>
+                            </div>
+
+                            <ul class="navview-menu">
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-home"></span></span>
+                                        <span class="caption">Home</span>
+                                    </a>
+                                </li>
+
+                                <li class="item-separator"></li>
+
+                                <li class="item-header">Main pages</li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-apps"></span></span>
+                                        <span class="caption">Process Scheduling</span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-gamepad"></span></span>
+                                        <span class="caption">Socket Programming</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="icon"><span class="mif-music"></span></span>
+                                        <span class="caption">Synchronization</span>
+                                    </a>
+                                    <ul class="navview-menu" data-role="dropdown">
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-gamepad"></span></span>
+                                                <span class="caption">Readers Writers</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span class="caption">Producer Consumer</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-images"></span></span>
+                                        <span class="caption">Disk Scheduling</span>
+                                    </a>
+                                </li>
+
+                                <li class="item-separator"></li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption">Documents</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="navview-content pl-4-md pr-4-md">
+                            <a href="javascript:WebSocketTest()">Run WebSocket</a>
+                            <div id="messages" style="height:200px;background:black;color:white;"></div>
+                            <input type="text" id="write"></input>
+                            <button onclick="send()">Write</button>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+    <!-- jQuery first, then Metro UI JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  </body>
 </html>

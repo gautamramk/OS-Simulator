@@ -7,8 +7,8 @@ ws_to_client = dict()
 
 async def handler(ws, path):
     ra = ws.remote_address
-    name = await ws.recv()
-    ws_to_client[ws] = name
+    #name = await ws.recv()
+    ws_to_client[ws] = 1
 
     listen_task = asyncio.ensure_future(ws.recv())
     while True:
@@ -16,8 +16,8 @@ async def handler(ws, path):
         if listen_task in done:
             message = listen_task.result()
             if message is not None:
-                sender = ws_to_client[ws]
-                tosend = sender+": "+str(message)
+                #sender = ws_to_client[ws]
+                tosend = str(message)
                 for key in ws_to_client:
                     await key.send(tosend)
 
