@@ -43,5 +43,6 @@ class delFolder(forms.Form):
     #     CHOICES.append((folder.name,folder))
     # folders = forms.ChoiceField(choices = CHOICES, widget=forms.RadioSelect())
     
-    
+class delFile(forms.Form):
+    files = forms.ModelChoiceField(queryset = File.objects.all())
     

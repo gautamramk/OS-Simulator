@@ -35,11 +35,12 @@ def directory(request, dir_id):
     form = newFolder()
     print(dir_id)
     df = delFolder()
+    delfile = delFile()
     print(df.fields)
     fileform = newfile()
     df.fields['folders'].queryset = Folder.objects.filter(parent=Folder.objects.get(id=dir_id))
     context = {'folders': folders, 'files': files, 'path': path, 'cur': curdir,
-               'newfolder': form, 'delfolder': df, 'newfile' : fileform}
+               'newfolder': form, 'delfolder': df,'delfile': delfile, 'newfile' : fileform}
 
     return render(request, 'tree/tree.html', context)
 
@@ -61,6 +62,13 @@ def de(request, dir_id):
     if df.is_valid():
         df.cleaned_data.get('folders').delete()
         #Folder.objects.filter(id=df).delete()
+    return HttpResponseRedirect("/d/" + str(dir_id))
+
+
+def delete(request, dir_id):
+    delfil = delFile(request.POST)
+    if delfil.is_valid():
+        delfil.cleaned_data.get('files').delete()
     return HttpResponseRedirect("/d/" + str(dir_id))
 
 def new_file(request, dir_id):
