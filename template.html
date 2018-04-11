@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  </head>
+  <body>
+
+
+                <div class="example p-0" style="height: 1000px;">
+                    <div data-role="navview" data-compact="md" data-expanded="lg" data-toggle="#pane-toggle">
+                        <nav class="navview-pane">
+                            <button class="pull-button">
+                                <span class="mif-menu"></span>
+                            </button>
+
+                            <div class="suggest-box">
+                                <input data-role="search" data-clear-button="false">
+                                <button class="holder">
+                                    <span class="mif-search"></span>
+                                </button>
+                            </div>
+
+                            <ul class="navview-menu">
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-home"></span></span>
+                                        <span class="caption">Home</span>
+                                    </a>
+                                </li>
+
+                                <li class="item-separator"></li>
+
+                                <li class="item-header">Main pages</li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-apps"></span></span>
+                                        <span class="caption">Process Scheduling</span>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-gamepad"></span></span>
+                                        <span class="caption">Socket Programming</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="icon"><span class="mif-music"></span></span>
+                                        <span class="caption">Synchronization</span>
+                                    </a>
+                                    <ul class="navview-menu" data-role="dropdown">
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-gamepad"></span></span>
+                                                <span class="caption">Readers Writers</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span class="caption">Producer Consumer</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-images"></span></span>
+                                        <span class="caption">Disk Scheduling</span>
+                                    </a>
+                                </li>
+
+                                <li class="item-separator"></li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption">Documents</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <div class="navview-content pl-4-md pr-4-md">
+                            <h1>
+                                <button id="pane-toggle" class="button square d-none-md"><span class="mif-menu" ></span></button>
+                               Your content goes here. Modify This Space.
+                            </h1>
+                            <p>
+                                You can make use of the side menus to show different variations of your program. Like fcfs, sjfs etc for Process Scheduling.
+                            </p>
+
+                            <div data-role="panel"
+                                 data-title-caption="Panel title"
+                                 data-title-icon="<span class='mif-apps'></span>"
+                                 data-width="240"
+                                 data-collapsible="true"
+                                 data-draggable="true">
+                                Raptus capios ducunt ad genetrix. Joy doesn’t beautifully respect any believer — but the power is what flies.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+    <!-- jQuery first, then Metro UI JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  </body>
+</html>
