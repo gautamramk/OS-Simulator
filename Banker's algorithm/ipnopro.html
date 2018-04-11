@@ -55,7 +55,7 @@
     function avail()
     {
         var i,x="";avail=new Array(100);k=0;alloc=new Array(100);require=new Array(100);
-        
+        x+="<p>Enter the amount of available resources</p>";
         num=Number(document.getElementById("n").value);
         for(i=0;i<num;i++)
         {
@@ -79,6 +79,7 @@
    {
        var x="";
        x+="<p>Enter the pid of the process</p>"+"<p><input id=\"pid\"></p>";
+       x+="<p>Enter the number of resources of each type required</p>";
        for(i=0;i<num;i++)
        {
           x=x+"<p><input id=\"req"+i+"\"></p>";
@@ -93,7 +94,6 @@
         {
             alloc[pid-1][i]+=Number(document.getElementById("req"+i).value);
             avail[i]-=Number(document.getElementById("req"+i).value);
-            if((alloc[pid-1][i]>require[pid-1][i])||(avail[i]<0))
                {
                     document.getElementById("demo").innerHTML="<p  id=\"error\">ERROR</p>";
                     error=1;
