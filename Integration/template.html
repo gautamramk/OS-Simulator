@@ -25,7 +25,7 @@
                                 </button>
                             </div>
 
-                            <ul class="navview-menu">   
+                            <ul class="navview-menu">
                                 <li>
                                     <a href="#">
                                         <span class="icon"><span class="mif-home"></span></span>
@@ -84,7 +84,7 @@
                                     </ul>
                                 </li>
                                 <li class="active">
-                                    <a href="#">
+                                    <a href="#" onclick="navigate('client')">
                                         <span class="icon"><span class="mif-gamepad"></span></span>
                                         <span class="caption">Socket Programming</span>
                                     </a>
@@ -96,7 +96,7 @@
                                     </a>
                                     <ul class="navview-menu" data-role="dropdown">
                                         <li>
-                                            <a href="#">
+                                            <a href="#" onclick="navigate('clientrw')">
                                                 <span class="icon"><span class="mif-gamepad"></span></span>
                                                 <span class="caption">Readers Writers</span>
                                             </a>
@@ -130,6 +130,19 @@
                                         <span class="caption">Documents</span>
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption"  onclick="navigate('paging')">Paging</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://127.0.0.1:8000">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption">Files</span>
+                                    </a>
+                                </li>
+
                             </ul>
                         </nav>
 
@@ -145,9 +158,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
     <script>
-       
 
-        
+
+
         function navigate(name) {
             frame = $('#frame');
             frame[0].setAttribute('src', name + '.html');

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+    <meta charset="utf-8">
+	<script type="text/javascript">
+        var ws = null;
+        function WebSocketTest() {
+            var messageContainer = document.getElementById("messages");
+            if ("WebSocket" in window) {
+                messageContainer.innerHTML = "WebSocket is supported by your Browser!";
+                ws = new WebSocket("ws://localhost:8888/?Id=123456789");
+                ws.onopen = function() {
+
+                };
+                ws.onmessage = function (evt) {
+                    var received_msg = evt.data;
+                    //messageContainer.innerHTML = "Message is received...";
+                    //alert(evt.data);
+                    var para = document.createElement("P");
+                    var t = document.createTextNode(evt.data);
+                    para.appendChild(t);
+                    messageContainer.appendChild(para);
+                    //messageContainer.innerHTML = received_msg;
+                    console.log(received_msg);
+                };
+                ws.onclose = function() {
+                    messageContainer.innerHTML = "Connection is closed...";
+                };
+            } else {
+                messageContainer.innerHTML = "WebSocket NOT supported by your Browser!";
+            }
+        }
+        function send(){
+            var txt = document.getElementById("write").value
+            ws.send(txt)
+        }
+
+        </script>
+  </head>
+  <body>
+
+
+
+                            <h1>Socket Chat</h1>
+                            <a href="javascript:WebSocketTest()">Run WebSocket</a>
+                            <div id="messages" style="height:200px;background:black;color:white;"></div>
+                            <input type="text" id="write"></input>
+                            <button onclick="send()">Write</button>
+
+
+                        
+
+  </body>
+</html>
