@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+  <title>Round Robin Scheduling</title> 
+  <head>
+      <style>
+          #myContainer{
+           
+            width: 1000px;
+            height: 50px;
+            position: relative;
+            background: rgb(0, 255, 0);
+          }
+          #myAnimation {
+            width: 0px;
+            height: 50px;
+            position: absolute;
+            background-color: blue;
+          }
+          #myContainer00{
+            
+            width: 1000px;
+            height: 10px;
+            position: relative;
+            background: rgb(255, 255, 255);
+          }
+          #myAnimation00{
+            width: 0px;
+            height: 10px;
+            position: absolute;
+            background-color: blue;
+          }
+          #clock {
+              
+              max-width: 160px;
+              margin: 0;
+              position: relative;
+              padding: 1em;
+          }
+          
+          
+          </style>
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+
+<body>
+
+<div><p style="font-size:50px;"><b>Round Robin Scheduling</b></p></div>
+<br>
+
+
+
+<form autocomplete="off">
+    <b>Enter the number of process:</b><br>
+    <input type="text" id ="nop" name="noofprocesses" ><br>
+    <b>Enter the time quantum:</b><br>
+    <input type = "text" id = "tq" name = "timequantum" ><br>
+    <button  class="btn btn-primary"  type="button" onclick="generate_table()";>Generate Table</button>
+</form>
+
+<br>
+
+<div id = "division"></div>
+
+<p id>
+<button class="btn btn-primary" onclick="myMove()">Generate Gantt Chart</button> 
+</p>
+
+<div id ="myContainer">
+<div id ="myAnimation"></div>
+</div>
+
+<div id ="myContainer00">
+<div id ="myAnimation00"></div>
+</div>
+
+
+<br>
+<br>
+<div id = "clock1">
+<p><b>TIMER</b></p>
+<div id ="time"><p id = "foo"></p></div>
+</div>
+
+
+<br>
+<br>
+<div id = "awt" style="font-size:120%;">
+    <p id = "averagewt"></p>
+</div>
+
+
+<div id = "att">
+    <p id = "averagett" style="font-size:120%;"></p>
+</div>
+
+
+
+<script>
+  var turn_around_time = [];
+  var waiting_time = [];
+  var total_wt = 0;
+  var total_tat = 0;
+
+  var avg_tat;
+  var avg_wt;
+
+  var nopval=2;
+  var time_quantum = 0;
+  var finish = [];
+  var comp_time =new Array(nopval);
+  var p = [];
+  var p1 = [];
+  var front = -1;
+  var rear = -1;
+  var remain = 0;
+  var queue = [];
+  function enqueue(item)
+  {
+      if (front == rear && front == -1)
+      {
+          front= front + 1;
+          rear=rear + 1;
+          queue[rear] = item;
+      }
+      else
+      {
+          rear = rear+1;
+          queue[rear] = item;
+      }
+      return 0;
+  }
+  function dequeue()
+  {
+      var temp;
+      temp = queue[front];
+      front = front +1;
+      return temp;
+  }
+
+  function calc()
+  {
+    var i,j,k;
+    //first compute the burst times
+    var burst_time = [];
+    var burst_time_c = [];
+    console.log("Hi");
+
+    for(i=1;i<nopval+1;i++)
+    {
+      // console.log(document.getElementById("table"));
+      burst_time.push(parseInt(document.getElementById("table").children[i].children[1].children[0].value));
+      burst_time_c.push(parseInt(document.getElementById("table").children[i].children[1].children[0].value));
+      //console.log(burst_time[0]);
+    }
+    //console.log(burst_time)
+
+    //for computing the arrival times
+    var arrival_time = [];
+    for (j=1;j<nopval+1;j++)
+    {
+      arrival_time.push(parseInt(document.getElementById("table").children[j].children[2].children[0].value));
+    }
+    
+    //for computing process ids
+    
+    for (j=1;j<nopval+1;j++)
+    {
+      p.push(parseInt(document.getElementById("table").children[j].children[0].children[0].value));
+    }
+    
+    
+
+
+    
+    console.log(burst_time)
+    console.log(arrival_time)
+    console.log(p)
+    
+    
+    var min_index = 0;
+    var min=10000;
+    for (i=nopval-1;i>=0;i--)
+    {
+       if (arrival_time[i]<=min)
+       {
+           min = arrival_time[i];
+           min_index = i;
+       }
+    }
+   
+
+
+    var time = arrival_time[min_index];
+    current_process_index = min_index;
+
+    var timec = time;
+    if (time!=0)
+    {
+        p1.push("");
+    }
+    
+    
+    remain = nopval;
+    var current_process_index=-1;
+    var checkarrived = [];
+    for (i=0;i<nopval;i++)
+    {
+        checkarrived[i] = 0;
+    }
+    checkarrived[min_index] = 1;
+    enqueue(0);
+    while(remain != 0)
+    {
+        time = time+1;
+        var temp = current_process_index;
+        current_process_index = queue[front];
+        burst_time[current_process_index]=burst_time[current_process_index]-1;
+        console.log(burst_time);
+        var j = 0;
+
+        for (j=0;j<nopval;j++)
+        {
+            if (arrival_time[j]<=time && burst_time[j]!=0 && j!=current_process_index && checkarrived[j] == 0)
+            {
+                enqueue(j);
+                checkarrived[j] = 1;
+            }   
+        }
+
+        if (burst_time[current_process_index]==0)
+        {
+            remain = remain - 1;
+            comp_time[current_process_index] = time;
+            timec = time;
+            if (front == rear)
+            {
+              front = -1;
+              rear = -1;
+            }
+            else
+              front = front + 1;
+        }
+        else
+        {
+            if (time == timec + time_quantum)
+            {
+                timec = timec +time_quantum;
+                if (burst_time[current_process_index]!=0)
+                   enqueue(current_process_index);
+                if (front == rear)
+                {
+                  front = -1;
+                  rear = -1;
+                }
+                else
+                  front = front + 1;
+                
+            }
+        }
+        
+        if (temp != current_process_index)
+        {   
+            finish.push(time-1)
+            p1.push("P"+(current_process_index+1))
+
+        }
+        console.log(queue);
+    }
+    
+    finish.push(comp_time[current_process_index]);
+    var k;
+    for (k = 0;k<nopval;k++)
+    {
+
+      turn_around_time[k]=comp_time[k]-arrival_time[k];
+      total_tat+=turn_around_time[k];
+
+      waiting_time[k] = turn_around_time[k] - burst_time_c[k];
+      total_wt+=waiting_time[k];
+    }
+    avg_tat = total_tat/nopval;
+    avg_wt = total_wt/nopval;
+    console.log(finish);
+    console.log(comp_time);
+  }
+
+  function generate_table() {
+  
+  
+  // get the reference for the body
+  var body = document.getElementById("division");
+  var nop = document.getElementById("nop");
+  var timequantum = document.getElementById("tq");
+  nopval = parseInt(nop.value);
+  time_quantum = parseInt(timequantum.value);
+
+  // creates a <table> element and a <tbody> element
+  var tblBody = document.createElement("table");
+  tblBody.setAttribute("id", "table");
+  // var tblBody = document.createElement("tbody");
+  //console.log(d[0]);
+  // creating all cells
+  for (var i = 0; i < (nopval + 1); i++) {
+    // creates a table row
+    var row = document.createElement("tr");
+    if (i == 0)
+    {
+      var cell= document.createElement("td");
+      // var cellText = document.createTextNode("Process ID");
+      // cell.appendChild(cellText);
+      cell.innerHTML = "Process ID"
+      row.appendChild(cell);
+
+      var cell = document.createElement("td"); 
+      // var cellText = document.createTextNode("Burst Time");
+      // cell.appendChild(cellText);
+      cell.innerHTML = "Burst Time"
+      row.appendChild(cell);
+
+      var cell = document.createElement("td");
+      // var cellText = document.createTextNode("Arrival Time");
+      // cell.appendChild(cellText);
+      cell.innerHTML = "Arrival Time"
+      row.appendChild(cell);
+
+      
+        
+    }
+    
+    else
+    {
+      for (var j = 0; j < 3; j++)
+      {
+     
+        // Create a <td> element and a text node, make the text
+        // node the contents of the <td>, and put the <td> at
+        // the end of the table row
+        var cell = document.createElement("td");
+        cell.innerHTML = "<input type='text'  name='cell1' id='cell2' autocomplete = 'off'>";
+        //var cellText = document.createTextNode("cell in row "+nopval+", column "+j);
+        // cell.appendChild(cellText);
+        row.appendChild(cell);
+      }
+    }
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+    
+  }
+ 
+  // put the <tbody> in the <table>
+  // tbl.appendChild(tblBody);
+  // appends <table> into <body>
+  body.appendChild(tblBody);
+  // sets the border attribute of tbl to 2;
+  tblBody.setAttribute("border", "2");
+
+}
+
+function myMove() {
+  calc();
+  var elem = document.getElementById("myAnimation");
+  var elem00 = document.getElementById("myAnimation00");
+
+  var pos = 0;
+  var pos00 = 0;
+
+  var tempp = 0;
+  var tempp00 = 0;
+
+  var all;
+  //l = [0,100,150,250];
+  //comp_time = [0,20,60,80,200];
+
+  console.log(finish[0],finish[1]);
+  
+  var comp_time = finish.concat();
+
+  
+  var current = 0;
+  var current00 = 0;
+  
+  var id00 = setInterval(frame00,400);
+  var id = setInterval(frame, 400);
+  
+
+  lc = ["red","orange","yellow","blue","violet","white"];
+  var lcptr = 0;
+  
+    
+  function frame() {
+    var tempelem = document.getElementById("foo");
+    tempelem.innerText= pos;
+
+    //tempelem.getElementsByTagName('p')[0].innerHTML = str(pos);
+
+    if (pos == finish[finish.length - 1])
+    {
+      clearInterval(id);
+      var getwt =  document.getElementById("averagewt");
+      var gettt =  document.getElementById("averagett");
+      var str1 = "The average waiting time= "+ avg_wt;
+      var str2 = "The average turn around time ="+ avg_tat;
+      getwt.innerHTML = str1.bold();
+      gettt.innerHTML = str2.bold();
+    }
+    else
+    {
+        //clock1.chilren[0].time = pos;
+        timeinfo  = pos;
+        
+        
+        //elem.style.width = pos+2 + 'px';
+        //elem.style.zIndex = "-1"
+        //elem.style.backgroundColor = "blue";
+            
+        var dynDiv = document.createElement("div");
+        dynDiv.id = "divDyna";
+        //dynDiv.innerHTML = "P1";
+        dynDiv.style.height = "50px";
+        dynDiv.style.width = "18px";
+        dynDiv.style.position= "absolute";
+        dynDiv.style.left = 18*pos + "px";
+        if (p1[current]=="")
+        {
+          dynDiv.style.backgroundColor ="rgb(0, 255, 0)";
+        }
+        else
+        {
+          dynDiv.style.backgroundColor = lc[lcptr];
+        }
+        elem.appendChild(dynDiv);
+          
+          
+        //document.getElementByTagName('body')[1].appendChild(elem)
+        pos++;
+            
+    
+        
+        
+        if (comp_time[current]==pos-1)
+        {
+          var content = document.createTextNode(p1[current]);
+          
+          elem.children[pos-1].appendChild(content);
+          elem.children[pos-1].style.lineHeight = "50px";
+          elem.children[pos-1].style.zIndex = "1";
+        
+        }
+        if (comp_time[current+1]==pos)
+        {
+         
+          current++;
+          lcptr = (lcptr+1)%6;
+            
+        }
+
+      
+      
+    }
+  }
+  function frame00()
+  {
+    //var tempelem = document.getElementById("foo");
+    //tempelem.innerText= pos;
+
+    //tempelem.getElementsByTagName('p')[0].innerHTML = str(pos);
+
+    if (pos00 == finish[finish.length - 1])
+    {
+      var content = document.createTextNode(finish[current00]);
+          
+      elem00.children[pos00-1].appendChild(content);
+      elem00.children[pos00-1].style.lineHeight = "20px";
+      elem00.children[pos00-1].style.zIndex = "1";
+      clearInterval(id00);
+    }
+    else
+    {
+        //clock1.chilren[0].time = pos;
+        
+        
+        
+        //elem.style.width = pos+2 + 'px';
+        //elem.style.zIndex = "-1"
+        //elem.style.backgroundColor = "blue";
+            
+        var dynDiv = document.createElement("div");
+        dynDiv.id = "divDyna";
+        //dynDiv.innerHTML = "P1";
+        dynDiv.style.height = "50px";
+        dynDiv.style.width = "18px";
+        dynDiv.style.position= "absolute";
+        dynDiv.style.left = 18*pos + "px";
+        dynDiv.style.backgroundColor ="rgb(255, 255, 255)";
+        elem00.appendChild(dynDiv);
+          
+          
+        //document.getElementByTagName('body')[1].appendChild(elem)
+        pos00++;
+            
+    
+        
+        
+        if (comp_time[current00]==pos00-1)
+        {
+          var content = document.createTextNode(finish[current00]);
+          
+          elem00.children[pos00-1].appendChild(content);
+          elem00.children[pos00-1].style.lineHeight = "20px";
+          elem00.children[pos00-1].style.zIndex = "1";
+        
+        }
+        if (comp_time[current00+1]==pos00)
+        {
+         
+          current00++;
+         
+            
+        }
+
+      
+      
+    }
+  }
+}
+</script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
 	<script >
 	var seq;
 	var logical = [0,0,0,0,0,0,0,0,0,0];
-	var framet = [0,0,0,0,0];
+	var framet = [-1,-1,-1,-1,-1];
 	var lastused = [-1,-1,-1,-1,-1];
 	var pagetable = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
 	
@@ -23,16 +23,15 @@
 		var o;
 		var i;
 		var j;
-
-
 			for( i=0; i<framet.length; i++)
 			{
-		if(framet[i] == 0)
+		if(framet[i] == -1)
 			{return i;}
 }
 	var pos = [0,0,0,0,0,0,0,0,0,0]
 	for( i=0; i<framet.length; i++)
 	{
+		
 		
 		for( j=curr+1; j<n; j++)
 		{
@@ -43,9 +42,7 @@
 				break;
 			}
 		}
-
 	}
-
 	var maxi = -1;
 	var  retPos = -1;
 	for( i=0; i<framet.length; i++)
@@ -57,16 +54,9 @@
 		}
 }
 	return retPos;
-
-
-
 	}
-
-
-
 	function optimal()
 	{ seq = document.getElementById("sequence").value.split(" ");
-
 		
 		for(var i=0;i<seq.length;i++)
 		{
@@ -111,7 +101,6 @@
 			}
 		}
 	}
-
 	function inputVirtual()
 	{
 		var vtable = document.getElementById("vtable");
