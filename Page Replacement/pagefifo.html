@@ -5,77 +5,107 @@
 <!--	<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
 
 </head>
-<script src="pagefifo.js"></script>
-<body>
+<body background= "linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)">
+<script>
+	var logical = [];
+	var framet = [];
+	var lastused = [];
+	var pagetable = [];
+	var np = null;
+	var nf = null;
 
+	function inputVirtual(){
+		var vtable = document.getElementById("vtable");
+		var frametable = document.getElementById("r");
+		np = parseInt(document.getElementById("np").value);
+		nf = parseInt(document.getElementById("nf").value);
+
+		for(var i = 1;i<=np;i++){
+			var row = vtable.insertRow(i);
+    		var cell1 = row.insertCell(0);
+    		var cell2 = row.insertCell(1);
+			var hue = "#"+((1<<24)*Math.random()|0).toString(16)
+			cell1.innerHTML=i-1;
+			logical.push(hue);
+			cell2.setAttribute("bgcolor",hue);
+		}
+		for(var i = 1;i<=nf;i++){
+			var row = frametable.insertRow(i);
+    		var cell1 = row.insertCell(0);
+    		var cell2 = row.insertCell(1);
+			//var hue = "#"+((1<<24)*Math.random()|0).toString(16)
+			cell1.innerHTML=i-1;
+			framet.push(-1);
+			lastused.push(-1);
+			//cell2.setAttribute("bgcolor",hue);
+		}
+	}
+	function fifoget(){
+		for(var i=0;i<framet.length;i++){
+			lastused[i]++;
+			if(lastused[i] == 0){
+				return i;
+			}
+
+		}
+		var maxind = 0;
+		for(var i=0;i<framet.length;i++){
+			if(lastused[i]>lastused[maxind]){
+				maxind=i;
+			}
+		}
+		return maxind;
+	}
+	function check(val){
+		//alert("nf="+nf.toString());
+		for(var i=0;i<nf;i++){
+			//console.log(framet[i]);
+			if (framet[i] == val){
+				return i;
+			}
+		}
+		return -1;
+	}
+	function fifo(){
+		var seq = document.getElementById("sequence").value.split(" ")
+		for(i=0;i<seq.length;i++){
+			//console.log(framet.toString());
+			//console.log(lastused.toString());
+			var val = parseInt(seq[i]);
+			var pos = check(val);
+			//alert(pos);
+			if(pos>-1){
+				alert("Page hit for page "+val.toString()+". In frame " + pos);
+
+			}else{
+
+				var newframe = fifoget();
+				alert("Page Fault. Select "+newframe+" as replacement victim.");
+				lastused[newframe] = 0;
+				framet[newframe] = val;
+				document.getElementById("r").rows[newframe+1].cells[1].setAttribute("bgcolor",logical[val]);
+			}
+		}
+	}
+</script>
+<input type="text" id="np"></input>
+<input type="text" id="nf"></input><button onclick="inputVirtual()" value="Add">Add</button>
 <div>
 	<table style="display:inline-block;" id="vtable" border="1">
 		<tr>
 			<th>Data</th>
 			<th>Page number</th>
 		</tr>
-		<tr><td>0</td><td><input type="text"></input></td></tr>
-		<tr><td>1</td><td><input type="text"></input></td></tr>
-		<tr><td>2</td><td><input type="text"></input></td></tr>
-		<tr><td>3</td><td><input type="text"></input></td></tr>
-		<tr><td>4</td><td><input type="text"></input></td></tr>
-		<tr><td>5</td><td><input type="text"></input></td></tr>
-		<tr><td>6</td><td><input type="text"></input></td></tr>
-		<tr><td>7</td><td><input type="text"></input></td></tr>
-		<tr><td>8</td><td><input type="text"></input></td></tr>
-		<tr><td>9</td><td><input type="text"></input></td></tr>
+
 
 </table>
-<button onclick="inputVirtual();">ADD DATA</button><br/><br/>
-	<table style="display:inline-block;"  border="1" id="f">
 
-		<tr>
-			<th>Page number</th>
-			<th>Frame number</th>
-		</tr>
-<tr>
-	<td>0<td>
-	</tr>
-<tr>
-	<td>1<td>
-		</tr><tr>
-	<td>2<td>
-	</tr><tr>
-	<td>3<td>
-	</tr><tr>
-	<td>4<td>
-	</tr><tr>
-	<td>5<td>
-	</tr><tr>
-	<td>6<td>
-	</tr><tr>
-	<td>7<td>
-	</tr><tr>
-	<td>8<td>
-	</tr><tr>
-	<td>9<td>
-	</tr>
-	</table>
 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp	<table style="display:inline-block;" border="1" id="r">
 		<tr>
 			<th>frame number</th>
 			<th>data</th>
 		</tr>
-			<tr>
-				<td>0<td>
-			</tr>
-			<tr>
-				<td>1<td>
-			</tr>
-			<tr>
-				<td>2<td>
-			</tr>
-			<tr>
-				<td>3<td>
-			</tr>
-			<tr>
-				<td>4<td>
-			</tr>
+
 	</table>
 
 </div>
