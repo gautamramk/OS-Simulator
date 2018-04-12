@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://metroui.org.ua/examples/desktop/desktop.html -->
+<html lang="en" class="metro-no-touch-device gr__metroui_org_ua"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+
+
+    <link rel="icon" href="https://metroui.org.ua/favicon.ico" type="image/x-icon">
+
+    <link href="./GUI_files/metro-all.css" rel="stylesheet">
+    <link href="./GUI_files/descktop.css" rel="stylesheet">
+
+    <title>NITK OS</title>
+<style></style></head>
+<body data-gr-c-s-loaded="true"><div class="notify-container"></div>
+    <div class="desktop">
+        <div class="window-area bg-dark"></div>
+        <div class="task-bar">
+            <div class="task-bar-section">
+                <button class="task-bar-item" id="start-menu-toggle">  <img src="https://mvapublicstorage.microsoft.com/tiles/MVA_Homepage_Tiles_Win10.png"></img>></button>
+                <div class="start-menu" data-role="dropdown" data-toggle-element="#start-menu-toggle" style="display: none;">
+                    <div class="start-menu-inner h-100">
+                        <div class="explorer">
+                            <ul class="v-menu w-100 bg-brandColor2 fg-white">
+                                <li><a onclick="createWindowYoutube()">Youtube window</a></li>
+                                <li><a onclick="createWindow()">New window</a></li>
+                                <li><a onclick="createWindowModal()">Modal window</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-bar-section tasks"></div>
+        </div>
+    </div>
+
+    <script src="./GUI_files/jquery-3.3.1.min.js"></script>
+    <script src="./GUI_files/metro.js"></script>
+    <script src="./GUI_files/desktop.js"></script>
+    <script>
+        var w_icons = [
+            'rocket', 'apps', 'cog', 'anchor'
+        ];
+        var w_titles = [
+            'rocket', 'apps', 'cog', 'anchor'
+        ];
+
+        function createWindow(){
+            var index = Metro.utils.random(0, 3);
+            Desktop.createWindow({
+                width: 300,
+                icon: "<span class='mif-"+w_icons[index]+"'></span>",
+                title: w_titles[index],
+                content: "<div class='p-2'>This is desktop demo created with Metro 4 Components Library</div>"
+            });
+        }
+
+        function createWindowModal(){
+            Desktop.createWindow({
+                width: 300,
+                icon: "<span class='mif-cogs'></span>",
+                title: "Modal window",
+                content: "<div class='p-2'>This is desktop demo created with Metro 4 Components Library</div>",
+                overlay: true,
+                //overlayColor: "transparent",
+                modal: true,
+                place: "center",
+                onShow: function(win){
+                    win.addClass("ani-swoopInTop");
+                    setTimeout(function(){
+                        win.removeClass("ani-swoopInTop");
+                    }, 1000);
+                },
+                onClose: function(win){
+                    win.addClass("ani-swoopOutTop");
+                }
+            });
+        }
+
+        function createWindowYoutube(){
+            Desktop.createWindow({
+                width: 500,
+                icon: "<span class='mif-youtube'></span>",
+                title: "Youtube video",
+                content: "https://youtu.be/S9MeTn1i72g",
+                clsContent: "bg-dark"
+            });
+        }
+
+    </script>
+    <!-- ads-script -->
+
+<iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;" src="./GUI_files/saved_resource.html"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}" style="display: none;"></div></body></html>

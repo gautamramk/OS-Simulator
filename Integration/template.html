@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+  </head>
+  <body>
+
+
+                <div class="example p-0" style="height: 1500px;">
+                    <div data-role="navview" data-compact="md" data-expanded="lg" data-toggle="#pane-toggle">
+                        <nav class="navview-pane">
+                            <button class="pull-button">
+                                <span class="mif-menu"></span>
+                            </button>
+
+                            <div class="suggest-box">
+                                <input data-role="search" data-clear-button="false">
+                                <button class="holder">
+                                    <span class="mif-search"></span>
+                                </button>
+                            </div>
+
+                            <ul class="navview-menu">
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-home"></span></span>
+                                        <span class="caption">Home</span>
+                                    </a>
+                                </li>
+
+                                <li class="item-separator"></li>
+
+                                <li class="item-header">Main pages</li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-apps"></span></span>
+                                        <span class="caption">Process Scheduling</span>
+                                    </a>
+                                    <ul class="navview-menu" data-role="dropdown">
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span id = "fcfs" class="caption" onclick="navigate('fcfs')">First Come First Server</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span id="sjf" class="caption" onclick="navigate('sjf')">Shortest Job First</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" onclick="navigate('pr')">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span id="priority" class="caption" onclick="navigate('pr')">Priority</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span id="rr" class="caption" onclick="navigate('roundrobin')">Round Robin</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span class="caption" onclick="navigate('multilevel')">Multi-level Queue</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span class="caption" onclick="navigate('multilevelfeedback')">Multi-level Feedback Queue</span>
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </li>
+                                <li class="active">
+                                    <a href="#" onclick="navigate('client')">
+                                        <span class="icon"><span class="mif-gamepad"></span></span>
+                                        <span class="caption">Socket Programming</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-toggle">
+                                        <span class="icon"><span class="mif-music"></span></span>
+                                        <span class="caption">Synchronization</span>
+                                    </a>
+                                    <ul class="navview-menu" data-role="dropdown">
+                                        <li>
+                                            <a href="#" onclick="navigate('clientrw')">
+                                                <span class="icon"><span class="mif-gamepad"></span></span>
+                                                <span class="caption">Readers Writers</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span class="caption">Producer Consumer</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="sleepingbarber.html">
+                                                <span class="icon"><span class="mif-film"></span></span>
+                                                <span class="caption" onclick="navigate('sleepingbarber')">Sleeping Barbers Problem</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-images"></span></span>
+                                        <span class="caption">Disk Scheduling</span>
+                                    </a>
+                                </li>
+
+                                <li class="item-separator"></li>
+
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption">Documents</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption"  onclick="navigate('paging')">Paging</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="http://127.0.0.1:8000">
+                                        <span class="icon"><span class="mif-folder"></span></span>
+                                        <span class="caption">Files</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </nav>
+
+                        <div class="navview-content pl-4-md pr-4-md">
+                            <iframe id="frame" width = "1500px" height="2000px" src="" name="targetframe" allowTransparency= "true" scrolling="yes" frameborder="0" >
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+
+    <!-- jQuery first, then Metro UI JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+    <script>
+
+
+
+        function navigate(name) {
+            frame = $('#frame');
+            frame[0].setAttribute('src', name + '.html');
+        }
+        </script>
+  </body>
+</html>

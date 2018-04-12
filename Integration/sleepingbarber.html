@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body background = "https://i.pinimg.com/originals/b7/5e/0f/b75e0f3abb6082cbc983501a3aa78a68.jpg">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+
+    <center><h1><div  style="background-color:white;width:600px"><font color="gray"><b><font size = "8">Sleeping Barber Problem</font></b></font></div></h1></center>
+    
+    <div id ="barbershop" , name = "barbershop", style="background-color:white;height:430px;width:270px;position:absolute;top:20%;left:65%"><p style="color:black;", align = "center"><b><font size="5">Barber Shop</font></b></p></div>
+    
+    
+    <div id ="seat" , name = "seat", style="height:120px;width:125px;position:absolute;top:25%;left:67%"></div>
+    <div id = "cust", name = "cust", style="height:125px;width:125px;position:absolute;top:30%;left:70%;border-radius:100px;border:1px solid #DC143C;background-color:#DC143C"></div>
+    <div id ="barber" , name = "barber", style="height:120px;width:125px;position:absolute;top:50%;left:65%"></div>
+    
+
+    <div id ="waitingroom" , name = "wr", style="background-color:gray;height:380px;width:262px;position:absolute;top:20%;left:10.2%"><p style="color:white;", align = "center"><b><font size="5">Waiting Room</font></b></p></div>
+    <button type = "button", id ="one", name = "one", style="height:80px;width:80px;position:absolute;top:25%;left:11%;background-color:#ff3333"><p style="color:white;"><b>SEAT-1</b></p></button>
+    <button type = "button", id ="two", name = "two", style="height:80px;width:80px;position:absolute;top:38%;left:11%;background-color:#ff3333"><p style="color:white;"><b>SEAT-2</b></p></button>
+    <button type = "button", id ="three", name = "three", style="height:80px;width:80px;position:absolute;top:51%;left:11%;background-color:#ff3333"><p style="color:white;"><b>SEAT-3</b></p></button>
+    <button type = "button", id ="four", name = "four", style="height:80px;width:80px;position:absolute;top:64%;left:11%;background-color:#ff3333"><p style="color:white;"><b>SEAT-4</b></p></button>
+    <button type = "button", id ="five", name = "five", style="height:80px;width:80px;position:absolute;top:25%;left:17%;background-color:#ff3333"><p style="color:white;"><b>SEAT-5</b></p></button>
+    <button type = "button", id ="six", name = "six", style="height:80px;width:80px;position:absolute;top:38%;left:17%;background-color:#ff3333"><p style="color:white;"><b>SEAT-6</b></p></button>
+    <button type = "button", id ="seven", name = "seven", style="height:80px;width:80px;position:absolute;top:51%;left:17%;background-color:#ff3333"><p style="color:white;"><b>SEAT-7</b></p></button>
+    
+    <button type = "button", id ="eight", name = "eight", style="height:80px;width:80px;position:absolute;top:64%;left:17%;background-color:#ff3333"><p style="color:white;"><b>SEAT-8</b></p></button>
+    <button type = "button", id ="nine", name = "nine", style="height:80px;width:80px;position:absolute;top:25%;left:23%;background-color:#ff3333"><p style="color:white;"><b>SEAT-9</b></p></button>
+    <button type = "button", id ="ten", name = "ten", style="height:80px;width:80px;position:absolute;top:38%;left:23%;background-color:#ff3333"><p style="color:white;"><b>SEAT-10</b></p></button>
+    <button type = "button", id ="eleven", name = "eleven", style="height:80px;width:80px;position:absolute;top:51%;left:23%;background-color:#ff3333"><p style="color:white;"><b>SEAT-11</b></p></button>
+    <button type = "button", id ="twelve", name = "twelve", style="height:80px;width:80px;position:absolute;top:64%;left:23%;background-color:#ff3333"><p style="color:white;"><b>SEAT-12</b></p></button>
+
+    <button class="btn btn-info" id ="count", type ="button" style ="height:50px;width:400px;position:absolute;top:33%;left:32%;">waiting = 0</button>
+
+
+    <script type = "text/javascript">
+      var queue = [0,0,0,0,0,0,0,0,0,0,0,0]; var num=0;
+      var rear =-1; var front =-1;
+      var hc = 0;
+      var colorqueue = ["red","green","blue","violet","yellow"];
+      var colorptr = -1;
+
+      function counter()
+      {
+        var counter = rear-front +1;
+        console.log(rear)
+        if(rear == -1 )
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 0</b></p>"
+        }
+        else if(counter==1)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 1</b></p>"
+        }
+        if(counter==2)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 2</b></p>"
+        }
+        if(counter==3)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 3</b></p>"
+        }
+        if(counter==4)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 4</b></p>"
+        }
+        if(counter==5)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 5</b></p>"
+        }
+        if(counter==6)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 6</b></p>"
+        }
+        if(counter==7)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 7</b></p>"
+        }
+        if(counter==8)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 8</b></p>"
+        }
+        if(counter==9)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 9</b></p>"
+        }
+        if(counter==10)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 10</b></p>"
+        }
+        if(counter==11)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 11</b></p>"
+        }
+        if(counter==12)
+        {
+          var change = document.getElementById("count");
+          change.innerHTML ="<p><b>Number of Customers in Waiting Room = 12</b></p>"
+        }
+
+      }
+
+      function color()
+      {
+        document.getElementById("seat").innerHTML = '<img src = "https://d30y9cdsu7xlg0.cloudfront.net/png/334133-200.png" />';
+        document.getElementById("barber").innerHTML = '<img src="https://cdn0.iconfinder.com/data/icons/mobile-development-icons/256/Barber.png" />';//'#FFFF00';
+        colorptr = (colorptr+1)%5;
+        if(hc == 1)
+        {
+         
+          document.getElementById("cust").style.backgroundColor = colorqueue[colorptr];
+          
+        }
+        if(hc == 0)
+        {
+          document.getElementById("cust").style.backgroundColor = 'white'
+          
+        }
+        if(queue[0]==1)
+        {
+          document.getElementById("one").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[1]==1)
+        {
+          document.getElementById("two").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[2]==1)
+        {
+          document.getElementById("three").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[3]==1)
+        {
+          document.getElementById("four").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[4]==1)
+        {
+          document.getElementById("five").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[5]==1)
+        {
+          document.getElementById("six").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[6]==1)
+        {
+          document.getElementById("seven").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[7]==1)
+        {
+          document.getElementById("eight").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[8]==1)
+        {
+          document.getElementById("nine").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[9]==1)
+        {
+          document.getElementById("ten").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[10]==1)
+        {
+          document.getElementById("eleven").style.backgroundColor = ' #4dff4d';
+        }
+        if(queue[11]==1)
+        {
+          document.getElementById("twelve").style.backgroundColor = ' #4dff4d';
+        }
+
+
+
+
+
+
+
+
+        //------------------------------------------------------
+
+        if(queue[0]==0)
+        {
+          document.getElementById("one").style.backgroundColor = '#ff3333';
+        }
+        if(queue[1]==0)
+        {
+          document.getElementById("two").style.backgroundColor = '#ff3333';
+        }
+        if(queue[2]==0)
+        {
+          document.getElementById("three").style.backgroundColor = '#ff3333';
+        }
+        if(queue[3]==0)
+        {
+          document.getElementById("four").style.backgroundColor = '#ff3333';
+        }
+        if(queue[4]==0)
+        {
+          document.getElementById("five").style.backgroundColor = '#ff3333';
+        }
+        if(queue[5]==0)
+        {
+          document.getElementById("six").style.backgroundColor = '#ff3333';
+        }
+        if(queue[6]==0)
+        {
+          document.getElementById("seven").style.backgroundColor = '#ff3333';
+        }
+        if(queue[8]==0)
+        {
+          document.getElementById("nine").style.backgroundColor = '#ff3333';
+        }
+        if(queue[9]==0)
+        {
+          document.getElementById("ten").style.backgroundColor = '#ff3333';
+        }
+        if(queue[10]==0)
+        {
+          document.getElementById("eleven").style.backgroundColor = '#ff3333';
+        }
+        if(queue[11]==0)
+        {
+          document.getElementById("twelve").style.backgroundColor = '#ff3333';
+        }
+       
+      }
+
+      function produce()
+      {
+          num++;
+          
+          if(front == -1 && rear ==-1)
+          {
+            front =0;
+            rear =0;
+            queue[rear] =1;
+          }
+          else
+          {
+              rear = (rear+1)%12;
+              queue[rear]=1;
+          }
+
+          if(hc==0)
+          {
+            
+            hc=1;
+           
+            consume();
+          }
+        color();
+        counter();
+
+      }
+      //------------------------------------------------
+      async function s()
+      {
+        await sleep(2000);
+      }
+      //------------------------------------------------
+
+
+      function consume()
+      {
+        num--;
+        
+        if(front==rear)
+        {
+          queue[front] =0;
+          front =-1;
+          rear =-1;
+        }
+        else
+        {
+          queue[front]=0;
+          front = (front+1)%12;
+        }
+        color();
+        counter();
+      }
+
+      function exit()
+      {
+        if(hc == 1)
+        {
+          if(rear!=-1)
+          {
+            consume();
+          }
+          else
+          {
+            hc=0;
+            color();
+          }
+          
+        }
+      }
+
+      function temp()
+      {
+
+          var temporary1 = 2;
+      }
+      $(document).ready(function(){
+                //this is for producing customers
+                //setInterval(temp,1000);
+                setInterval(produce,1500);
+                
+                //this is for exiting customers
+                setInterval(consume,2500);
+                
+     
+  
+      });
+    </script>
+    
+    <div id ="barber" , name = "barber", style="background-color:white;height:250px;width:270px;position:absolute;top:50%;left:40%"><p align = "center"><b><font size="4">LEGEND</font></b></p></div>
+    
+
+    <p style="position:absolute;top:55%;left:41%;font-size:22px"><b>Barber Shop: </b></p>
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:60%;left:41%;background-color:#DCDCDC"> </button>
+
+    <p style="position:absolute;top:60%;left:44%;font-size:20px">Barber is sleeping</p>
+    
+    <p style="position:absolute;top:70%;left:41%;font-size:22px"><b>Waiting Room: </b></p>
+
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:75%;left:41%;background-color:red"> </button>
+    <p style="position:absolute;top:75%;left:44%;font-size:20px"> Vacant Seat</p>
+
+    <button type = "button", style="height:25px;width:25px;position:absolute;top:80%;left:41%;background-color:green"> </button>
+    <p style="position:absolute;top:80%;left:44%;font-size:20px"> Occupied Seat</p>
+
+  </div>
+</body>

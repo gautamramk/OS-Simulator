@@ -1,0 +1,125 @@
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Paging</h1>
+	<script >
+	var log = [];
+	var framet = [];
+	var pt = [];
+    var numpages = null;
+    var numframes = null;
+    var pagesize = null;
+    function start(){
+        var logical = document.getElementById("vtable");
+        var pagetable = document.getElementById("f");
+        var frames = document.getElementById("r");
+        numpages = parseInt(document.getElementById("nump").value);
+        numframes = parseInt(document.getElementById("numf").value);
+        pagesize = parseInt(document.getElementById("psize").value);
+        //alert(numpages.toString()+ " " + numframes.toString());
+        for(var i=1;i<=numpages;i++){
+            var row = logical.insertRow(i);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = i-1;
+            var hue = "#"+((1<<24)*Math.random()|0).toString(16);
+
+            cell2.setAttribute("bgcolor",hue);
+
+            var row = pagetable.insertRow(i);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = i-1;
+            cell2.innerHTML = "<input type=text></text>"
+            log.push(hue);
+            pt.push(-1);
+
+            var inp1 = document.getElementById("psize");
+            var inp2 = document.getElementById("nump");
+            var inp3 = document.getElementById("numf");
+            var b1 = document.getElementById("b1");
+            inp1.disabled = true;
+            inp2.disabled = true;
+            inp3.disabled = true;
+            b1.disabled = true;
+        }
+
+        for(var i =1;i<=numframes;i++){
+            var row = frames.insertRow(i);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            cell1.innerHTML = i-1;
+        }
+    }
+
+    function process(){
+        var pagetable = document.getElementById("f");
+        var frames = document.getElementById("r");
+        for(var i = 1;i<numpages;i++)
+		{
+
+            if (pagetable.rows[i].cells[1].getElementsByTagName("input")[0].value.length>0){
+			    pt[i-1] = parseInt(pagetable.rows[i].cells[1].getElementsByTagName("input")[0].value);
+                frames.rows[pt[i-1]+1].cells[1].setAttribute("bgcolor",log[i-1]);
+            }
+		}
+        //alert(pt.toString());
+    }
+    function calc(){
+        var b2 = document.getElementById("b2");
+        b2.disabled = true;
+        var pagetable = document.getElementById("f");
+        var l = parseInt(document.getElementById("logmem").value);
+        var pagenum= Math.floor(l/pagesize);
+        var offset=l%pagesize;
+        if(pt[pagenum] != -1){
+            var frame = pt[pagenum];
+            var address = frame*pagesize+offset;
+            alert(address);
+        }else{
+            alert("Not in frame table.");
+        }
+    }
+
+	</script>
+	<div>
+        Page Size:<input type="text" id="psize"></input>
+        Number of Pages:<input type="text" id="nump"></input>
+        Number of frames:<input type="text" id="numf"></input>
+		<button onclick="start();" id="b1">ADD DATA</button><br/><br/>
+	<table style="display:inline-block;" id="vtable" border="1">
+		<tr>
+			<th>Page number</th>
+			<th>Data</th>
+		</tr>
+
+</table>
+
+	&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<table style="display:inline-block;"  border="1" id="f">
+
+		<tr>
+			<th>Page number</th>
+			<th>Frame number</th>
+		</tr>
+	</table>
+&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+    <table style="display:inline-block;" border="1" id="r">
+		<tr>
+			<th>frame number</th>
+			<th>data</th>
+		</tr>
+	</table>
+
+</div><br><br>
+
+
+<button onclick="process()" id = "b2">Submit</button><br><br>
+
+Enter Logical Address<input type="text" id="logmem"></input><button onclick="calc();" value="Calculate">Calculate</button>
+</body>
+</html>
+
+</body>
+</html>

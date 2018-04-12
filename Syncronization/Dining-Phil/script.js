@@ -59,7 +59,7 @@ function release_forks()
         console.log(p+" released forks");
         philosopher[p]=0;
         document.getElementById(p.toString()).setAttribute("class","sleep"); 
-        document.getElementById(p.toString()).innerHTML="Sleeping";                    
+        document.getElementById(p.toString()).innerHTML="Thinking";                    
                
         
         dine();
@@ -95,13 +95,3 @@ $(function(){
 
 
 
-
-function appendText(s) {
-    var txt = $("<p></p>",{
-        text: s,
-        "class": 'line'+lineCount,
-    })
-    lineCount++;
-    $(".fakeScreen").append(txt);
-    
-}
