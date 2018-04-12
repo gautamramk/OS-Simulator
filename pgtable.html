@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page Table</title>
+		<meta charset="utf-8"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="pgtable.js" type="text/javascript"> 
+		</script>
+        <!--<link rel="stylesheet" type="text/css" href="../Index/css/bootswatch.css" />-->
+    </head>
+    <body>
+        <!-- Navigation Bar -->
+
+        <br>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-3">Paging Technique</h1>
+                <p class="lead">Paging is a memory management scheme that eliminates the need for contiguous allocation of physical memory. This scheme permits the physical address space of a process to be non – contiguous.</p>
+                <li style="margin-left: 30px; font-size: 17px">The Physical Address Space is conceptually divided into a number of fixed-size blocks, called frames.</li>
+                <li style="margin-left: 30px; font-size: 17px">The Logical address Space is also splitted into fixed-size blocks, called pages. </li>
+                <li style="margin-left: 30px; font-size: 17px">Page Size = Frame Size</li>
+                <p style="margin-left: 30px; font-size: 17px">The mapping from virtual to physical address is done by the memory management unit (MMU) which is a hardware device and this mapping is known as paging technique.</p>
+
+                   
+            </div>
+            <form>
+            	<fieldset>
+            		<div class="row">
+            			<div class="form-group" style="margin-left:50px; float:left;  width: 20%">
+                            <label class="col-form-label">Size of Logical Address Space</label>
+                            <input class="form-control" id="slas" placeholder="Size Logical" type="number" size="30" onkeyup="SetLAS(parseInt(this.value, 10));">
+                        </div>
+                        <div class="form-group" style="margin-left:50px; float:left;  width: 20%">
+                            <label class="col-form-label">Size of Physical Address Space</label>
+                            <input class="form-control" id="spas" placeholder="Size Physical" type="number" size="30" onkeyup="SetPAS(parseInt(this.value, 10));">
+                        </div>
+                        <div class="form-group" style="margin-left:50px; float:left;  width: 20%">
+                            <label class="col-form-label">Size of Page</label>
+                            <input class="form-control" id="spg" placeholder="Size Page" type="number" size="30" onkeyup="SetPg(parseInt(this.value, 10));">
+                        </div>
+                        <div class="form-group" style="margin-left:50px; float:left;  width: 20%">
+            				<label class="col-form-label">Enter Logical Address to Search</label>
+                            <input class="form-control" id="lg_search" placeholder="Logical Address" type="number" size="30" onkeyup="Setla(parseInt(this.value, 10));"">
+            			</div>
+            		</div>
+            	</fieldset>
+            </form>
+            <form name="pg_entries">
+            	<fieldset>
+            		<div class="row">
+            			<div class="form-group" style="margin-left:50px; float:left;  width: 20%">
+                            <label class="col-form-label">Enter Page Table</label>
+                            <div id="PgFields"></div>
+			            </div>
+                    </div>
+                    <button type="submit" id="enter" class="btn btn-primary" style="margin-left: 36px" onclick="checkentry()">Enter</button>
+            	</fieldset>
+            </form>
+            <br>
+            <div class="col-md-5">
+	            <div class="list-group" id="list">
+				</div>
+			</div>
+        </div>
+        <br>
+        <br>
+    </body>
+</html>
