@@ -6,6 +6,7 @@
 
 </head>
 <body background= "linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)">
+<h1> Least Recently Used Page Replacement </h1>
 <script>
 	var logical = [];
 	var framet = [];
@@ -13,6 +14,8 @@
 	var pagetable = [];
 	var np = null;
 	var nf = null;
+	var gc = null;
+
 
 	function inputVirtual(){
 		var vtable = document.getElementById("vtable");
@@ -66,30 +69,40 @@
 		}
 		return -1;
 	}
-	function lru(){
+	async function lru(){
 		var seq = document.getElementById("sequence").value.split(" ")
 		for(i=0;i<seq.length;i++){
-			console.log(framet.toString());
-			//console.log(lastused.toString());
 			var val = parseInt(seq[i]);
 			var pos = check(val);
 			//alert(pos);
+			var node = document.createElement("P");
 			if(pos>-1){
 				alert("Page hit for page "+val.toString()+". In frame " + pos);
+				var txt = document.createTextNode("Page hit for page "+val.toString()+". In frame " + pos);
+				node.appendChild(txt);
                 lastused[pos] = 0;
 			}else{
 
 				var newframe = lruget();
 				alert("Page Fault. Select "+newframe+" as replacement victim.");
+				var txt = document.createTextNode("Page Fault. Select "+newframe+" as replacement victim.");
+				node.appendChild(txt);
+
 				lastused[newframe] = 0;
 				framet[newframe] = val;
 				document.getElementById("r").rows[newframe+1].cells[1].setAttribute("bgcolor",logical[val]);
+				//await sleep(2000);
 			}
+			document.getElementById("messages").appendChild(node);
 		}
+
 	}
+
+
 </script>
-<input type="text" id="np"></input>
-<input type="text" id="nf"></input><button onclick="inputVirtual()" value="Add">Add</button>
+Number of Pages:<input type="text" id="np"></input>
+Number of Frames:<input type="text" id="nf"></input><button onclick="inputVirtual()" value="Add">Add</button>
+<br><br>
 <div>
 	<table style="display:inline-block;" id="vtable" border="1">
 		<tr>
@@ -109,7 +122,12 @@
 	</table>
 
 </div>
+<br><br><br><br>
+<div id="messages">
+<h3>Sequence of Events</h3>
+</div>
 <input type="text" id="sequence"></input>
 <button onclick="lru()">Submit</button>
+
 </body>
 </html>
