@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel ="stylesheet" type ="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/3.4.5/css/tabulator.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono" rel="stylesheet">
+
+    <title>NITK OS</title>
+  </head>
+  <body style="background-color:#333c45">
+    
+
+
+
+        <h1 style="font-family: 'IBM Plex Mono', monospace; color:white; text-align: center; margin-top:50px">Disk Scheduling</h1>
+
+        <div class="row" style="padding:100px; padding-top:20px; padding-bottom:20px;margin-top:40px">
+            <div class="col-sm-6">
+                <div class="container" >
+                <img  style="border: ridge; border-color:black z-index=-1" width="700px" src="diska.png">
+                <img  src="needle.png" id="needle">
+                </div>
+            </div>
+            <div class="col-sm-2" >
+                    <div class="input-group mb-2">
+
+                            <input type="text" class="form-control" id="start" placeholder="Enter Start Head" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button id="btnGo" class="btn btn-info" type="button">Set</button>
+                            </div>
+                            <br>
+                    </div>
+
+                    <div class="input-group mb-2">
+
+                            <input type="text" class="form-control" id="cyllinder" placeholder="Enter Cyllinder Number" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button id="btnGo" class="btn btn-info" type="button"  onclick="addCyllinder()">Add</button>
+                            </div>
+                            <br>
+                    </div>
+                
+                    <button class="btn btn-danger" style="width:200px" onclick="time_trigger()">SEEK</button>
+                    <br>
+                    <br>                 
+                    <div id="alertpa" class="alert alert-success" role="alert" style="display:none" ></div>
+                    <br>
+                    <h1 id="disp" style="font-family: 'IBM Plex Mono', monospace; color:white; text-align: center; margin-top:50px; display:none"></h1>
+                        
+            </div>
+            <div class="col-sm-2">
+                    <div class="card" id="list" style="background: #eaeaea; padding:20px; display:none; border: ridge "></div>    
+                    <div class="card" id="schedule" style="background: #eaeaea; padding:20px; display:none; border: ridge "></div>                   
+            </div>
+        </div>
+               
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="needle.js"></script>
+</body>
+</html>

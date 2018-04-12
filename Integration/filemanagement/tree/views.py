@@ -36,6 +36,7 @@ def directory(request, dir_id):
     print(dir_id)
     df = delFolder()
     delfile = delFile()
+    delfile.fields['files'].queryset = File.objects.filter(parent=Folder.objects.get(id=curdir.id))
     print(df.fields)
     fileform = newfile()
     df.fields['folders'].queryset = Folder.objects.filter(parent=Folder.objects.get(id=dir_id))
