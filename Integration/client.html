@@ -9,7 +9,7 @@
             var messageContainer = document.getElementById("messages");
             if ("WebSocket" in window) {
                 messageContainer.innerHTML = "WebSocket is supported by your Browser!";
-                ws = new WebSocket("ws://localhost:8888/?Id=123456789");
+                ws = new WebSocket("ws://localhost:9000/?Id=123456789");
                 ws.onopen = function() {
 
                 };
@@ -49,7 +49,7 @@
                             <button onclick="send()">Write</button>
 
 
-                        
+
 
   </body>
 </html>
